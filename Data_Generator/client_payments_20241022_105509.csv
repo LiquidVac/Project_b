@@ -1,0 +1,4 @@
+client_id,payment_id,payment_date,currency,amount,payment_method,transaction_id
+294,2600,2024-03-30 09:47:56.820457,RUB,244509.02,credit_card,8665
+294,4457,2024-02-06 06:55:19.820457,RUB,749270.8,credit_card,4218
+294,8060,2024-01-21 07:24:34.820457,USD,7619.85,credit_card,9102

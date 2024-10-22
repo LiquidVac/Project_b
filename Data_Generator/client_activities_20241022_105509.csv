@@ -1,0 +1,8 @@
+client_id,activity_date,activity_type,activity_location,ip_address,device
+294,2024-06-05 12:01:43.820457,view_account,tag/main,218.38.196.177,Mozilla/5.0 (Android 4.3.1; Mobile; rv:45.0) Gecko/45.0 Firefox/45.0
+294,2024-01-21 23:42:31.820457,login,tag/posts,218.38.196.177,Mozilla/5.0 (Android 4.3.1; Mobile; rv:45.0) Gecko/45.0 Firefox/45.0
+294,2024-03-29 06:05:18.820457,pay_bill,search/category/category,218.38.196.177,Mozilla/5.0 (Android 4.3.1; Mobile; rv:45.0) Gecko/45.0 Firefox/45.0
+294,2024-02-05 18:27:34.820457,transfer_funds,list,218.38.196.177,Mozilla/5.0 (Android 4.3.1; Mobile; rv:45.0) Gecko/45.0 Firefox/45.0
+294,2024-06-13 13:19:18.820457,view_account,categories/search,218.38.196.177,Mozilla/5.0 (Android 4.3.1; Mobile; rv:45.0) Gecko/45.0 Firefox/45.0
+294,2024-01-19 23:59:14.820457,pay_bill,wp-content/tags,218.38.196.177,Mozilla/5.0 (Android 4.3.1; Mobile; rv:45.0) Gecko/45.0 Firefox/45.0
+294,2024-03-14 22:04:49.820457,login,app/main,218.38.196.177,Mozilla/5.0 (Android 4.3.1; Mobile; rv:45.0) Gecko/45.0 Firefox/45.0
