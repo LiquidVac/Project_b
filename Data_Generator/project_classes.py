@@ -2,14 +2,14 @@ import project_gen_functions as fun
 
 
 class Login:
-    def __init__(self, client_id=None):
+    def __init__(self, client_id: int):
         self.client_id = client_id
         self.login_date = fun.random_date(fun.start_date, fun.end_date)
         self.ip_address = fun.fake.ipv4()
         self.location = f'{fun.random.uniform(-90, 90)}, {fun.random.uniform(-180, 180)}'
         self.device = fun.fake.user_agent()
 
-    def login_data_to_dict(self):
+    def login_data_to_dict(self) -> dict:
         return {
             'client_id': self.client_id,
             'login_date': self.login_date,
@@ -20,19 +20,15 @@ class Login:
 
 
 class Activity(Login):
-    def __init__(self, login_instance):
-        super().__init__(login_instance.client_id)
-        self.login_date = login_instance.login_date
-        self.ip_address = login_instance.ip_address
-        self.location = login_instance.location
-        self.device = login_instance.device
+    def __init__(self, login_instance: Login):
+        for attribute in vars(login_instance):
+            setattr(self, attribute, getattr(login_instance, attribute))
         self.activity_date = fun.random_date(self.login_date, fun.end_date)
-        self.activity_type = fun.random.choices(['view_account', 'transfer_funds', 'pay_bill', 'call_support',
-                                                'chat_support'], [7, 3, 3, 1, 2])
-        self.activity_type = ''.join(self.activity_type)
+        self.activity_type = ''.join(fun.random.choices(['view_account', 'transfer_funds', 'pay_bill', 'call_support',
+                                                'chat_support'], [7, 3, 3, 1, 2]))
         self.activity_location = fun.fake.uri_path()
 
-    def activity_data_to_dict(self):
+    def activity_data_to_dict(self) -> dict:
         return {
             'client_id': self.client_id,
             'activity_date': self.activity_date,
@@ -44,15 +40,9 @@ class Activity(Login):
 
 
 class Transaction(Activity):
-    def __init__(self, activity_instance, receiver=None):
-        super().__init__(activity_instance)
-        self.login_date = activity_instance.login_date
-        self.ip_address = activity_instance.ip_address
-        self.location = activity_instance.location
-        self.device = activity_instance.device
-        self.activity_date = activity_instance.activity_date
-        self.activity_type = activity_instance.activity_type
-        self.activity_location = activity_instance.activity_location
+    def __init__(self, activity_instance: Activity, receiver=None):
+        for attribute in vars(activity_instance):
+            setattr(self, attribute, getattr(activity_instance, attribute))
         self.receiver = receiver
         self.transaction_date = fun.random_date(self.activity_date, self.activity_date + fun.timedelta(days=1))
         self.currency = fun.random.choice(['USD', 'RUB'])
@@ -61,7 +51,7 @@ class Transaction(Activity):
         self.transaction_id = fun.random.randint(1000, 1000000000)
         self.account_number = fun.fake.iban()
 
-    def transaction_data_to_dict(self):
+    def transaction_data_to_dict(self) -> dict:
         return {
             'client_id': self.client_id,
             'transaction_id': self.transaction_id,
@@ -75,21 +65,8 @@ class Transaction(Activity):
 
 class Payment(Transaction):
     def __init__(self, transaction_instance):
-        super().__init__(transaction_instance)
-        self.transaction_instance = transaction_instance
-        self.login_date = transaction_instance.login_date
-        self.ip_address = transaction_instance.ip_address
-        self.location = transaction_instance.location
-        self.device = transaction_instance.device
-        self.activity_date = transaction_instance.activity_date
-        self.activity_type = transaction_instance.activity_type
-        self.activity_location = transaction_instance.activity_location
-        self.receiver = transaction_instance.receiver
-        self.transaction_date = transaction_instance.transaction_date
-        self.currency = transaction_instance.currency
-        self.amount = transaction_instance.amount
-        self.transaction_id = transaction_instance.transaction_id
-        self.account_number = transaction_instance.account_number
+        for attribute in vars(transaction_instance):
+            setattr(self, attribute, getattr(transaction_instance, attribute))
         self.payment_id = fun.random.randint(1000, 1000000000)
         self.payment_date = fun.random_date(self.transaction_date, self.transaction_date + fun.timedelta(days=1))
         self.payment_method = fun.random.choice(['credit_card', 'debit_card', 'bank_transfer', 'e_wallet'])
@@ -108,14 +85,8 @@ class Payment(Transaction):
 
 class CallSupport(Activity):
     def __init__(self, activity_instance):
-        super().__init__(activity_instance)
-        self.login_date = activity_instance.login_date
-        self.ip_address = activity_instance.ip_address
-        self.location = activity_instance.location
-        self.device = activity_instance.device
-        self.activity_date = activity_instance.activity_date
-        self.activity_type = activity_instance.activity_type
-        self.activity_location = activity_instance.activity_location
+        for attribute in vars(activity_instance):
+            setattr(self, attribute, getattr(activity_instance, attribute))
         self.duration = fun.random.randint(60, 1800)
         self.result = fun.random.choice(['resolved', 'unresolved'])
 
@@ -176,7 +147,6 @@ class Client:
         for payment in self.payments: 
             if fun.random.random() < 0.05:
                 payment.amount *= 10
-                payment.transaction_instance.amount *= 10
 
     def generate_anomalous_logins(self, max_activities_per_login):
         if fun.random.random() < 0.024:
