@@ -5,7 +5,7 @@ import pandas as pd
 from datetime import datetime, timedelta
 import os
 
-fake = Faker()
+fake = Faker('ru_RU')
 
 
 def random_date(start, end):
