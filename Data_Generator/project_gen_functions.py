@@ -5,7 +5,7 @@ import pandas as pd
 from datetime import datetime, timedelta
 
 fake = Faker()
-a = 10
+
 
 def random_date(start, end):
     return start + timedelta(seconds=random.randint(0, int((end - start).total_seconds())))
