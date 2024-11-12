@@ -5,6 +5,8 @@ __pycache__/
 docker-compose.yaml
 .env/
 .vs/
+.venv/
 log/
 resources/products.json
 info.txt
+data/
